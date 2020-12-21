@@ -9,26 +9,24 @@ import java.util.List;
 
 public class RegionController {
     RegionRepository rc = new JavaIORegionRepositoryImpl();
-    RegionView rw = new RegionView();
-
 
     public List<Region> getAll() {
         return rc.getAll();
     }
 
     public Region getById(String id) {
-        return rc.getById(rw.createForOutupGetById(id));
+        return rc.getById(Long.parseLong(id));
     }
 
     public Region save(String id, String name) {
-        return rc.save(rw.createForSaved(id, name));
+        return rc.save(new Region(Long.parseLong(id), name));
     }
 
     public Region update(String id, String name) {
-        return rc.save(rw.createForUpdate(id, name));
+        return rc.update(new Region(Long.parseLong(id), name));
     }
 
     public void deleteById(String id){
-        rc.deleteById(rw.createForDelete(id));
+        rc.deleteById(Long.parseLong(id));
     }
 }

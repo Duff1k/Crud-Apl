@@ -37,7 +37,6 @@ public class JavaIORegionRepositoryImpl implements RegionRepository {
 
             for (int i = 0; i < strings.size(); i++) {
                 regions.add(new Region(Long.parseLong(strings.get(i).split(", ")[0]), strings.get(i).split(", ")[1])); //вот здесь ошибка почему-то
-                System.out.println(strings.get(i));
             }
 
         } catch (IOException e) {

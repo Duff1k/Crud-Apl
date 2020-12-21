@@ -1,67 +1,41 @@
 package com.david.crudapl.view;
 
+import Console.ConsoleInput;
 import com.david.crudapl.controller.RegionController;
 import com.david.crudapl.model.Region;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class RegionView {
+    public RegionController rc = new RegionController();
 
-
-    public Long createForOutupGetById(String idForGet){
-        return Long.parseLong(idForGet);
+    public void getAll(){
+        List<Region> regions = rc.getAll();
+        regions.forEach(r -> {
+            System.out.println(r);
+        });
     }
 
-    public Long createForDelete(String idForDelete){
-        return Long.parseLong(idForDelete);
+    public void getById(){
+        Region region = rc.getById(ConsoleInput.id);
+        System.out.println(region);
     }
 
-    public Region createForSaved(String idForSave, String nameForSave) {
-        return new Region(Long.parseLong(idForSave), nameForSave);
+    public void save(){
+        rc.save(ConsoleInput.savingId, ConsoleInput.savingReg);
+        getAll();
     }
 
-    public Region createForUpdate(String idForUpdate, String nameForUpdate) {
-        return new Region(Long.parseLong(idForUpdate), nameForUpdate);
-    }
-
-    public static void main(String[] args) {
-        RegionController regionController = new RegionController();
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Какую команду исполнить ?");
-        String task = sc.next();
-
-        String getAllTask = "Вывести всё";
-
-        String getByIdTask = "Вывести по id ";
-
-        String saveIdTask = "Сохранить";
-
-        String deleteByIdTask = "Удалить";
-
-        String updateTask = "Редактировать запись";
-
-        if(task.equals(getByIdTask)) {
-            System.out.println("Введите id, который хотите вывести");
-            String idForGet = sc.next();
-            regionController.getById(idForGet);
-        } else if(task.equals(saveIdTask)) {
-            System.out.println("Введите id и name для сохранения");
-            String idForSave = sc.next();
-            String nameForSave = sc.next();
-            regionController.save(idForSave, nameForSave);
-        } else if(task.equals(deleteByIdTask)) {
-            System.out.println("Введите id, который хотите удалить");
-            String idForDelete = sc.next();
-            regionController.deleteById(idForDelete);
-        } else if(task.equals(updateTask)){
-            System.out.println("Введите id и name для редактирования");
-            String idForUpdate = sc.next();
-            String nameForUpdate = sc.next();
-            regionController.update(idForUpdate, nameForUpdate);
-        } else if(task.equals(getAllTask)) {
-            regionController.getAll();
-        }
+    public void update(){
+        rc.update(ConsoleInput.updateId, ConsoleInput.updateReg);
+        getAll();
 
     }
 
+    public void deleteById(){
+        rc.deleteById(ConsoleInput.deleteId);
+        getAll();
+
+    }
 }
