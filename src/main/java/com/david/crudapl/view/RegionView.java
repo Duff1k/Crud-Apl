@@ -38,4 +38,14 @@ public class RegionView {
         getAll();
 
     }
+
+    public static Long inputId(){
+        Scanner sc = new Scanner(System.in);
+        return sc.nextLong();
+    }
+
+    public static String inputRegion(){
+        Scanner sc = new Scanner(System.in);
+        return sc.next();
+    }
 }
